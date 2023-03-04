@@ -1,5 +1,8 @@
 package com.tut;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 
 import org.hibernate.Session;
@@ -13,7 +16,7 @@ import org.hibernate.cfg.Configuration;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
         System.out.println( "Project Started " );
         Configuration cfg = new Configuration() ;
@@ -23,7 +26,7 @@ public class App
         
         //creating student
         Student st = new Student () ;
-        st.setId(77);
+        st.setId(71);
         st.setName("Sarmad Rehman");
         st.setCity("Mianwali");
         System.out.println(st);
@@ -35,6 +38,13 @@ public class App
         ad.setOpen(true);
         ad.setAddedDate(new Date());
         ad.setX(123232);
+        
+        //Reading image 
+        FileInputStream fis = new FileInputStream("src/main/java/pic.png");
+        byte [] data = new byte [fis.available()];
+        fis.read(data);
+        ad.setImage(data) ;
+        
         
         //Session configuration
         Session session = factory.openSession() ;
